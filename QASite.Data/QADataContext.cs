@@ -18,7 +18,26 @@ namespace QASite.Data
         {
             optionsBuilder.UseSqlServer(_connectionString);
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
+            modelBuilder.Entity<QuestionsTags>()
+               .HasKey(qt => new { qt.QuestionId, qt.TagId });
+
+            modelBuilder.Entity<QuestionLike>()
+                .HasKey(qt => new { qt.QuestionId, qt.UserId });
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<QuestionsTags> QuestionsTags { get; set; }
+        public DbSet<QuestionLike> QuestionLikes { get; set; }
     }
 }

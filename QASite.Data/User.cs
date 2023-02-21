@@ -10,6 +10,7 @@ namespace QASite.Data
         public string Email { get; set; }
         public string PasswordHash { get; set; }
         public List<Question> Questions { get; set; }
-
+        public List<Answer> Answers { get; set; }
+        public List<QuestionLike> LikedQuestions { get; set; }
     }
 }

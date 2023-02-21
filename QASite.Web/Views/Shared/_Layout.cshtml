@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - QASite.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    @await RenderSectionAsync("styles", false)
 </head>
 <body>
     <header>

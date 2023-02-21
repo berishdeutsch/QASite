@@ -1,8 +1,24 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model IndexViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        @foreach (var question in Model.Questions)
+        {<div class="card card-body bg-light">
+                <h4>
+                    <a href="/questions/viewquestion?id=@question.Id">
+                        @question.Title
+                    </a>
+                </h4>
+                <div>
+                    <span>Tags:</span>
+                </div>
+                <div style="margin-top: 10px;">
+                    @(question.Text.Length < 200 ? question.Text : (question.Text.Substring(0, 200) + "..."))
+                </div>
+                @*<span>Likes: 0</span>*@
+                <br />
+                <span>@question.Answers.Count answer(s)</span>
+            </div>
+        }
+    </div>
 </div>
